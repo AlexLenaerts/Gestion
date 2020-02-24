@@ -1,1 +1,0 @@
-﻿select * from Stock where id = '1'
