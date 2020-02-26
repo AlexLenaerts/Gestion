@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.SqlClient;
 
 
 
@@ -12,16 +13,18 @@ namespace Gestion_du_stock
 
         static void Main(string[] args)
         {
-            DB db = new DB();
-            db.connectDB();
+            //Connection à la DB
+            string ConnectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Alexandre\Gestion_du_stock\Gestion_du_stock\Database1.mdf; Integrated Security = True";
+            SqlConnection con = new SqlConnection(ConnectionString);
+            DB.ConnectDB(con);
 
-            article article1 = new article(123, "article1", 12.3, 1);
-            List<article> Stock = new List<article>(4);
-            ManageStock manageStock = new ManageStock();
-            Stock.Add(article1);
+            //Stock temporaire
+            //List<article> Stock = new List<article>();
+
             string decision;
             do
             {
+                Console.WriteLine();
                 Console.WriteLine("Que voulez-vous faire ?");
                 Console.WriteLine("  1- Recherche d'un article");
                 Console.WriteLine("  2- Ajouter un article");
@@ -38,7 +41,9 @@ namespace Gestion_du_stock
                         Console.WriteLine("Recherche d'un article");
                         Console.WriteLine("Introduisez la référence de l'article");
                         string articleREF = Console.ReadLine();
-                        manageStock.SearchArticleByRef(Stock, Int32.Parse(articleREF));
+                        //ManageStock.SearchArticleByRef(Stock, Int32.Parse(articleREF));
+                        Console.WriteLine();
+                        DB.SearchArticle("ref",articleREF,con);
                         break;
 
                     case "2":
@@ -51,15 +56,18 @@ namespace Gestion_du_stock
                         string articlePRICE = Console.ReadLine();
                         Console.WriteLine("Introduisez la quantité en stock de cet article");
                         string articleQUANTITY = Console.ReadLine();
-                        article ArticleName = new article(Int32.Parse(articleREF), articleNAME, Convert.ToDouble(articlePRICE), Int32.Parse(articleQUANTITY));
-                        manageStock.AddArticle(Stock, ArticleName);
+                        article newArticle = new article(Int32.Parse(articleREF), articleNAME, Convert.ToDouble(articlePRICE), Int32.Parse(articleQUANTITY));
+                        //ManageStock.AddArticle(Stock, newArticle);
+                        Console.WriteLine();
+                        DB.AddToDB(newArticle,con);
                         break;
 
                     case "3":
                         Console.WriteLine("Supprimer un article");
                         Console.WriteLine("Introduisez la référence de l'article");
                         articleREF = Console.ReadLine();
-                        manageStock.RemoveArticleByRef(Stock, Int32.Parse(articleREF));
+                        DB.RemoveArticleByRef(articleREF,con);
+                        //ManageStock.RemoveArticleByRef(Stock, Int32.Parse(articleREF));
                         break;
 
                     case "4":
@@ -72,28 +80,35 @@ namespace Gestion_du_stock
                         articlePRICE = Console.ReadLine();
                         Console.WriteLine("Introduisez la quantité en stock de cet article");
                         articleQUANTITY = Console.ReadLine();
-                        ArticleName = new article(Int32.Parse(articleREF), articleNAME, Convert.ToDouble(articlePRICE), Int32.Parse(articleQUANTITY));
-                        manageStock.ModifyArticle(Stock, Int32.Parse(articleREF), ArticleName);
+                        newArticle = new article(Int32.Parse(articleREF), articleNAME, Convert.ToDouble(articlePRICE), Int32.Parse(articleQUANTITY));
+                        //ManageStock.ModifyArticle(Stock, Int32.Parse(articleREF), newArticle);
+                        Console.WriteLine();
+                        DB.ModifyArticle(newArticle,con);
                         break;
 
                     case "5":
                         Console.WriteLine("Rechercher un article par le nom");
                         Console.WriteLine("Introduisez le nom de l'article");
                         articleNAME = Console.ReadLine();
-                        manageStock.SearchArticleByName(Stock, articleNAME);
+                        //ManageStock.SearchArticleByName(Stock, articleNAME);
+                        Console.WriteLine();
+                        DB.SearchArticle("name",articleNAME,con);
                         break;
 
                     case "6":
                         Console.WriteLine("Rechercher un article par son prix");
                         Console.WriteLine("Introduisez le prix de l'article");
                         articlePRICE = Console.ReadLine();
-                        manageStock.SearchArticleByprice(Stock, Convert.ToDouble(articlePRICE));
+                        //ManageStock.SearchArticleByprice(Stock, Convert.ToDouble(articlePRICE));
+                        Console.WriteLine();
+                        DB.SearchArticle("price",articlePRICE,con);
                         break;
+
                     case "7":
                         Console.WriteLine("Affichage du stock");
-                        manageStock.DisplayAllArticle(Stock);
-                        db.showDB();
-
+                        //ManageStock.DisplayAllArticle(Stock);
+                        Console.WriteLine();
+                        DB.ShowDB(con);
                         break;
 
                     case "8":
@@ -101,14 +116,14 @@ namespace Gestion_du_stock
                         break;
 
                     default:
-                        Console.WriteLine("Choix invalide");
+                        Console.WriteLine();
+                        Console.WriteLine("Choix invalide"); 
                         break;
                 }
-            }while (decision != "8");
+            }
+            while (decision != "8");
             Console.ReadKey();
-            db.CloseDB();
+            DB.CloseDB(con);
         }
-     
-
     }
 }

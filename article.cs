@@ -6,40 +6,21 @@ namespace Gestion_du_stock
 {
     class article
     {
-        private int _NumRef;
-        private string _name;
-        private double _SellPrice;
-        private int _quantityStock;
-        public int NumberRef 
-        {
-            get { return _NumRef; }
-            set{ _NumRef = value; }
-        }
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        public double SellPrice
-        {
-            get { return _SellPrice; }
-            set { _SellPrice = value; }
-        }
-        public int QuantityStock
-        {
-            get { return _quantityStock; }
-            set { _quantityStock = value; }
-        }
+        public int NumberRef { get; set; }
+        public string Name { get; set; }
+        public double SellPrice { get; set; }
+        public int QuantityStock { get; set; }
+        
         public article(int NumRef, string name, double SellPrice, int quantityStock)
         {
-            this._NumRef = NumRef;
-            this._name = name;
-            this._SellPrice = SellPrice;
-            this._quantityStock = quantityStock;
+            this.NumberRef = NumRef;
+            this.Name = name;
+            this.SellPrice = SellPrice;
+            this.QuantityStock = quantityStock;
         }
         public override string ToString()
         {
-            return ("\r\nRéférence: " + this._NumRef +"\r\nNom: " + this._name + "\r\nPrix de vente :" + this._SellPrice + "\r\nQuantity :" + this._quantityStock);
+            return ("\r\nRéférence: " + NumberRef +"\r\nNom: " + Name + "\r\nPrix de vente :" + SellPrice + "\r\nQuantity :" + QuantityStock);
         }
     }
 

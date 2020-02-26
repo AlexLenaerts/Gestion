@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Gestion_du_stock
 {
-    class ManageStock
+    static class ManageStock
     {
-        public void SearchArticleByRef(List<article> Stock,
+        public static void SearchArticleByRef(List<article> Stock,
                                             int numberRef)
         {
             article item = Stock.Find(item2 => item2.NumberRef.Equals(numberRef));
@@ -20,7 +20,7 @@ namespace Gestion_du_stock
             }
         }
 
-        public void AddArticle(List<article> Stock,
+        public static void AddArticle(List<article> Stock,
                                         article article)
         {
             int compteur = 0;
@@ -40,7 +40,7 @@ namespace Gestion_du_stock
                 Console.WriteLine("déjà en stock");
             }
         }
-        public void RemoveArticleByRef(List<article> Stock, int numberRef)
+        public static void RemoveArticleByRef(List<article> Stock, int numberRef)
         {
             List<article> Stock2 = new List<article>(Stock);
             foreach (article element in Stock2)
@@ -53,7 +53,7 @@ namespace Gestion_du_stock
         }
 
 
-        public void ModifyArticle(List<article> Stock, int numberRef, article new_article)
+        public static void ModifyArticle(List<article> Stock, int numberRef, article new_article)
         {
             foreach (article element in Stock)
             {
@@ -66,7 +66,7 @@ namespace Gestion_du_stock
             }
 
         }
-        public void SearchArticleByName(List<article> Stock, string name)
+        public static void SearchArticleByName(List<article> Stock, string name)
         {
             foreach (article element in Stock)
             {
@@ -76,7 +76,7 @@ namespace Gestion_du_stock
                 }
             }
         }
-        public void SearchArticleByprice(List<article> Stock, double price)
+        public static void SearchArticleByprice(List<article> Stock, double price)
         {
             foreach (article element in Stock)
             {
@@ -87,7 +87,7 @@ namespace Gestion_du_stock
             }
 
         }
-        public void DisplayAllArticle(List<article> Stock)
+        public static void DisplayAllArticle(List<article> Stock)
         {
             foreach (article element in Stock)
             {
