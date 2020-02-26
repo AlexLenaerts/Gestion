@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gestion_du_stock
+﻿namespace Gestion_du_stock
 {
     class article
     {
@@ -10,7 +6,7 @@ namespace Gestion_du_stock
         public string Name { get; set; }
         public double SellPrice { get; set; }
         public int QuantityStock { get; set; }
-        
+
         public article(int NumRef, string name, double SellPrice, int quantityStock)
         {
             this.NumberRef = NumRef;
@@ -20,7 +16,7 @@ namespace Gestion_du_stock
         }
         public override string ToString()
         {
-            return ("\r\nRéférence: " + NumberRef +"\r\nNom: " + Name + "\r\nPrix de vente :" + SellPrice + "\r\nQuantity :" + QuantityStock);
+            return ("\r\nRéférence: " + NumberRef + "\r\nNom: " + Name + "\r\nPrix de vente :" + SellPrice + "\r\nQuantity :" + QuantityStock);
         }
     }
 

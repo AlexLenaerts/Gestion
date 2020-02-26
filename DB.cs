@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 namespace Gestion_du_stock
@@ -28,16 +24,16 @@ namespace Gestion_du_stock
             Console.WriteLine("Disconnected from the server");
         }
 
-        public static void SearchArticle (string param, string value, SqlConnection con)
+        public static void SearchArticle(string param, string value, SqlConnection con)
         {
             string queryStr = $"SELECT * from STOCK where {param}= '{value}'";
             SqlCommand cmd = new SqlCommand(queryStr, con);
             SqlDataReader dr = cmd.ExecuteReader();
-            if(dr.HasRows)
+            if (dr.HasRows)
             {
                 while (dr.Read())
                 {
-                Console.WriteLine(String.Format("{0} {1} {2} {3}", dr[1], dr[2],dr[3],dr[4]));
+                    Console.WriteLine(String.Format("{0} {1} {2} {3}", dr[1], dr[2], dr[3], dr[4]));
                 }
             }
             else
@@ -51,7 +47,7 @@ namespace Gestion_du_stock
         {
             string queryStr = $"INSERT INTO STOCK (name, ref, quantity, price) VALUES ('{article.Name}',{article.NumberRef},{article.QuantityStock},{article.SellPrice})";
             SqlCommand cmd = new SqlCommand(queryStr, con);
-            cmd.ExecuteNonQuery();  
+            cmd.ExecuteNonQuery();
 
         }
 
@@ -59,24 +55,24 @@ namespace Gestion_du_stock
         {
             string queryStr = $"DELETE FROM STOCK where ref= '{reference}'";
             SqlCommand cmd = new SqlCommand(queryStr, con);
-            cmd.ExecuteNonQuery();  
+            cmd.ExecuteNonQuery();
         }
 
-            public static void ModifyArticle(article article, SqlConnection con)
+        public static void ModifyArticle(article article, SqlConnection con)
         {
             string queryStr = $"Update STOCK set name = '{article.Name}', quantity= {article.QuantityStock}, price= {article.SellPrice} where ref= {article.NumberRef}";
             SqlCommand cmd = new SqlCommand(queryStr, con);
-            cmd.ExecuteNonQuery();  
+            cmd.ExecuteNonQuery();
         }
-        
+
         public static void ShowDB(SqlConnection con)
-        {  
+        {
             string queryStr = "SELECT * from STOCK";
-            SqlCommand cmd = new SqlCommand(queryStr,con);  
-            SqlDataReader dr = cmd.ExecuteReader(); 
+            SqlCommand cmd = new SqlCommand(queryStr, con);
+            SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-            Console.WriteLine(String.Format("{0} {1} {2} {3}", dr[1], dr[2],dr[3],dr[4]));
+                Console.WriteLine(String.Format("{0} {1} {2} {3}", dr[1], dr[2], dr[3], dr[4]));
             }
             dr.Close();
         }

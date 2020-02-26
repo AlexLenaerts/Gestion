@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.SqlClient;
 
 
@@ -43,7 +40,7 @@ namespace Gestion_du_stock
                         string articleREF = Console.ReadLine();
                         //ManageStock.SearchArticleByRef(Stock, Int32.Parse(articleREF));
                         Console.WriteLine();
-                        DB.SearchArticle("ref",articleREF,con);
+                        DB.SearchArticle("ref", articleREF, con);
                         break;
 
                     case "2":
@@ -59,14 +56,14 @@ namespace Gestion_du_stock
                         article newArticle = new article(Int32.Parse(articleREF), articleNAME, Convert.ToDouble(articlePRICE), Int32.Parse(articleQUANTITY));
                         //ManageStock.AddArticle(Stock, newArticle);
                         Console.WriteLine();
-                        DB.AddToDB(newArticle,con);
+                        DB.AddToDB(newArticle, con);
                         break;
 
                     case "3":
                         Console.WriteLine("Supprimer un article");
                         Console.WriteLine("Introduisez la référence de l'article");
                         articleREF = Console.ReadLine();
-                        DB.RemoveArticleByRef(articleREF,con);
+                        DB.RemoveArticleByRef(articleREF, con);
                         //ManageStock.RemoveArticleByRef(Stock, Int32.Parse(articleREF));
                         break;
 
@@ -83,7 +80,7 @@ namespace Gestion_du_stock
                         newArticle = new article(Int32.Parse(articleREF), articleNAME, Convert.ToDouble(articlePRICE), Int32.Parse(articleQUANTITY));
                         //ManageStock.ModifyArticle(Stock, Int32.Parse(articleREF), newArticle);
                         Console.WriteLine();
-                        DB.ModifyArticle(newArticle,con);
+                        DB.ModifyArticle(newArticle, con);
                         break;
 
                     case "5":
@@ -92,7 +89,7 @@ namespace Gestion_du_stock
                         articleNAME = Console.ReadLine();
                         //ManageStock.SearchArticleByName(Stock, articleNAME);
                         Console.WriteLine();
-                        DB.SearchArticle("name",articleNAME,con);
+                        DB.SearchArticle("name", articleNAME, con);
                         break;
 
                     case "6":
@@ -101,7 +98,7 @@ namespace Gestion_du_stock
                         articlePRICE = Console.ReadLine();
                         //ManageStock.SearchArticleByprice(Stock, Convert.ToDouble(articlePRICE));
                         Console.WriteLine();
-                        DB.SearchArticle("price",articlePRICE,con);
+                        DB.SearchArticle("price", articlePRICE, con);
                         break;
 
                     case "7":
@@ -117,7 +114,7 @@ namespace Gestion_du_stock
 
                     default:
                         Console.WriteLine();
-                        Console.WriteLine("Choix invalide"); 
+                        Console.WriteLine("Choix invalide");
                         break;
                 }
             }
