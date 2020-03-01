@@ -1,6 +1,6 @@
 ﻿namespace Gestion_du_stock
 {
-    class article
+    public class article
     {
         public int NumberRef { get; set; }
         public string Name { get; set; }

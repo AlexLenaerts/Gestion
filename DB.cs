@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Gestion_du_stock
 {
-    static class DB
+    public class DB
     {
         public static void ConnectDB(SqlConnection con)
         {
@@ -70,11 +71,25 @@ namespace Gestion_du_stock
             string queryStr = "SELECT * from STOCK";
             SqlCommand cmd = new SqlCommand(queryStr, con);
             SqlDataReader dr = cmd.ExecuteReader();
+
             while (dr.Read())
             {
                 Console.WriteLine(String.Format("{0} {1} {2} {3}", dr[1], dr[2], dr[3], dr[4]));
             }
             dr.Close();
+        }
+        public static List<article> DBTOLIST(SqlConnection con)
+        {
+            string queryStr = "SELECT * from STOCK";
+            SqlCommand cmd = new SqlCommand(queryStr, con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<article> stock = new List<article>();
+            while (dr.Read())
+            {
+                stock.Add(new article(Convert.ToInt32(dr[2]), dr[1].ToString(), Convert.ToDouble(dr[4]), Convert.ToInt32(dr[3])));
+            }
+            dr.Close();
+            return stock;
         }
     }
 }

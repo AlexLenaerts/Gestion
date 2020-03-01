@@ -8,6 +8,7 @@ namespace Gestion_du_stock
     class Program
     {
 
+
         static void Main(string[] args)
         {
             //Connection à la DB

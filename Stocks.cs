@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Gestion_du_stock
 {
-    static class ManageStock
+    public static class ManageStock
     {
         public static void SearchArticleByRef(List<article> Stock,
                                             int numberRef)
