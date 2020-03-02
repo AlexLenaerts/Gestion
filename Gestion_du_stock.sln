@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch", "Batch.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WpfApp2\WPF.csproj", "{F6CB4D57-4283-4F56-958A-4B20EAFCE211}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batch", "Batch", "{1D7CA045-42F4-4BA2-A0CD-EED58B702730}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{77815660-DDE3-4B92-9D97-61532EE7E9BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +28,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0DF51C80-B2E1-46F0-A37A-A18E18B04EAD} = {1D7CA045-42F4-4BA2-A0CD-EED58B702730}
+		{F6CB4D57-4283-4F56-958A-4B20EAFCE211} = {77815660-DDE3-4B92-9D97-61532EE7E9BF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {41133F09-9D7D-4EE5-A6CF-A1F84FDC5AF0}
