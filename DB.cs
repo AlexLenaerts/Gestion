@@ -13,9 +13,13 @@ namespace Gestion_du_stock
                 con.Open();
                 Console.WriteLine("Connected to the server");
             }
-            catch
+            catch (Exception)
             {
                 Console.WriteLine("Serveur non disponible");
+            }
+            finally
+            {
+                Console.WriteLine("Version 1.0");
             }
         }
 
@@ -49,8 +53,8 @@ namespace Gestion_du_stock
             string queryStr = $"INSERT INTO STOCK (name, ref, quantity, price) VALUES ('{article.Name}',{article.NumberRef},{article.QuantityStock},{article.SellPrice})";
             SqlCommand cmd = new SqlCommand(queryStr, con);
             cmd.ExecuteNonQuery();
-
         }
+
 
         public static void RemoveArticleByRef(string reference, SqlConnection con)
         {

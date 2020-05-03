@@ -63,7 +63,6 @@ namespace Gestion_du_stock
                     element.SellPrice = new_article.SellPrice;
                 }
             }
-
         }
         public static void SearchArticleByName(List<article> Stock, string name)
         {

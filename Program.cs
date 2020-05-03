@@ -1,13 +1,13 @@
-﻿using System;
+﻿using log4net.Config;
+using log4net.Core;
+using System;
 using System.Data.SqlClient;
-
-
+using System.IO;
 
 namespace Gestion_du_stock
 {
     class Program
     {
-
 
         static void Main(string[] args)
         {
@@ -15,6 +15,11 @@ namespace Gestion_du_stock
             string ConnectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Alexandre\Gestion_du_stock\Gestion_du_stock\Database1.mdf; Integrated Security = True";
             SqlConnection con = new SqlConnection(ConnectionString);
             DB.ConnectDB(con);
+            //var configFile = Directory.GetCurrentDirectory() + @"\log4net.config";
+            //BasicConfigurator.Configure();
+
+            var task = new loggingService();
+
 
             //Stock temporaire
             //List<article> Stock = new List<article>();
@@ -22,6 +27,8 @@ namespace Gestion_du_stock
             string decision;
             do
             {
+                task.Run("Démarrage de l'application", Level.Info);
+
                 Console.WriteLine();
                 Console.WriteLine("Que voulez-vous faire ?");
                 Console.WriteLine("  1- Recherche d'un article");

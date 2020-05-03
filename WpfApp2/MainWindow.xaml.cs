@@ -40,8 +40,7 @@ namespace WpfApp2
             DB.ConnectDB(con);
             stock_article = DB.DBTOLIST(con);
             Refresh();
-        }
-
+        } 
         public void Refresh()
         {
             this.DataContext = null;
