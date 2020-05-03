@@ -1,3 +1,3 @@
 # Gestion
 
-Applications (console & WPF) connectées à une database pour gérer le stock d'un magasin
+Applications (console & WPF) et un site web connectés à une database pour gérer le stock d'un magasin
