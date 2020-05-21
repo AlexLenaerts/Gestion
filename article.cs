@@ -1,4 +1,6 @@
-﻿namespace Gestion_du_stock
+﻿using System.Collections.Generic;
+
+namespace Gestion_du_stock
 {
     public class article
     {
@@ -7,12 +9,15 @@
         public double SellPrice { get; set; }
         public int QuantityStock { get; set; }
 
-        public article(int NumRef, string name, double SellPrice, int quantityStock)
+    public article(int NumRef, string name, double SellPrice, int quantityStock)
         {
             this.NumberRef = NumRef;
             this.Name = name;
             this.SellPrice = SellPrice;
             this.QuantityStock = quantityStock;
+        }
+        public article()
+        {
         }
         public override string ToString()
         {
