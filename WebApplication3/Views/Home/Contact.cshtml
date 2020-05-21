@@ -1,0 +1,30 @@
+﻿@model WebApplication3.Models.article
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div id="contact-form row">
+    <form asp-controller="Home" asp-action="Contact"  method="post">
+        <div class="form-group">
+            <div class="col-md-12 form-group">
+                <input asp-for="Name" class="form-control" placeholder="Nom" />
+                <span asp-validation-for="Name" style="color: red"></span>
+            </div>
+            <div class="col-md-12 form-group">
+                <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
+                <span asp-validation-for="NumberRef" style="color: red"></span>
+            </div>
+            <div class="col-md-12 form-group">
+                <input asp-for="SellPrice" class="form-control" placeholder="Prix" />
+                <span asp-validation-for="SellPrice" style="color: red"></span>
+            </div>
+            <div class="col-md-12 form-group">
+                <input asp-for="QuantityStock" class="form-control" placeholder="Quantité" />
+                <span asp-validation-for="QuantityStock" style="color: red"></span>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-primary" type="submit" id="submit">Envoyer</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,90 @@
+﻿@model WebApplication3.Models.article
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div id="contact-form row">
+    <form asp-controller="Home" asp-action="" method="post">
+        <div class="form-group">
+            <div class="col-md-6">
+                <button class="btn btn-primary" type="submit" name="add" id="Add">Ajouter</button>
+                <button class="btn btn-primary" type="submit" name="Remove" id="Remove">Supprimer</button>
+                <button class="btn btn-primary" type="submit" name="Modify" id="Modify">Modifier</button>
+                <button class="btn btn-primary" type="submit" name="Search" id="Search">Rechercher </button>
+            </div>
+            @switch (article.show)
+            {
+                case "Add":
+                    <div class="col-md-12 form-group">
+                        <input asp-for="Name" class="form-control" placeholder="Nom" />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input asp-for="SellPrice" class="form-control" placeholder="Prix" />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input asp-for="QuantityStock" class="form-control" placeholder="Quantité" />
+                    </div>
+                    break;
+
+                case "Remove":
+                    <div class="col-md-12 form-group">
+                        <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
+                    </div>
+                    break;
+
+                case "Modify":
+                    <div class="col-md-12 form-group">
+                        <input asp-for="Name" class="form-control" placeholder="Nom" />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input asp-for="SellPrice" class="form-control" placeholder="Prix" />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input asp-for="QuantityStock" class="form-control" placeholder="Quantité" />
+                    </div>
+
+                    break;
+                case "Search":
+                    <div class="col-md-12 form-group">
+                        <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
+                    </div>
+
+                    @if (article.found == true)
+                    {
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Reférence</th>
+                                    <th>Nom</th>
+                                    <th>Prix</th>
+                                    <th>Quantité</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var a in (IEnumerable<Gestion_du_stock.article>)ViewData["ref"])
+                                {
+                                    <tr>
+                                        <td>@a.NumberRef</td>
+                                        <td>@a.Name</td>
+                                        <td>@a.SellPrice</td>
+                                        <td>@a.QuantityStock</td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    article.found = false;
+                    break;
+            }
+        </div>
+    </form>
+</div>
