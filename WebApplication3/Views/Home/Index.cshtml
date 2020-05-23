@@ -4,6 +4,7 @@
 }
 @model WebApplication3.Models.article
 
+<meta charset='utf-8'>
 
 
 <h1 class="display-4">Etat actuel du stock</h1>
@@ -29,12 +30,12 @@
                         <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
                     </div>
                     <div class="col-md-12 form-group">
-                        <input asp-for="SellPrice" class="form-control" placeholder="Prix" value=@ViewData["save2"]/>
+                        <input asp-for="SellPrice" class="form-control" placeholder="Prix" value=@ViewData["save2"] />
                     </div>
                     <div class="col-md-12 form-group">
-                        <input asp-for="QuantityStock" class="form-control" placeholder="Quantité" value="@ViewData["save3"]"/>
+                        <input asp-for="QuantityStock" class="form-control" placeholder="Quantité" value="@ViewData["save3"]" />
                     </div>
-                    <button class="btn btn-primary" type="submit" name="Ajouter" id="Ajouter">Confirmer</button>
+                    <button class="btn btn-primary" onclick="function alerte()" type="submit" name="Ajouter" id="Ajouter">Confirmer</button>
 
                     break;
 
@@ -60,7 +61,7 @@
                                     <td>@a.Name</td>
                                     <td>@a.SellPrice</td>
                                     <td>@a.QuantityStock</td>
-                                    <td><button class="btn btn-primary" type="submit" name="Remove_@a.NumberRef" id="Remove">Supprimer</button></td>
+                                    <td><button onclick="return confirm('Are you sure ?')" class="btn btn-primary" type="submit" name="Remove_@a.NumberRef" id="Remove">Supprimer</button></td>
                                     <td><button class="btn btn-primary" type="submit" name="Modify_@a.NumberRef" id="Modify">Modifier</button></td>
 
                                 </tr>
@@ -92,7 +93,7 @@
                             <input asp-for="QuantityStock" class="form-control" placeholder="Quantité" value="@a.QuantityStock" />
                         </div>
                     }
-                    <button class="btn btn-primary" type="submit" name="Confirm" id="Confirmer">Confirmer</button>
+                    <button class="btn btn-primary" onclick="return confirm('Are you sure ?')" type="submit" name="Confirm" id="Confirmer">Confirmer</button>
                     break;
 
                 case "Remove":
@@ -166,7 +167,7 @@
                                     <td>@a.Name</td>
                                     <td>@a.SellPrice</td>
                                     <td>@a.QuantityStock</td>
-                                    <td><button class="btn btn-primary" type="submit" name="Remove_@a.NumberRef" id="Remove">Supprimer</button></td>
+                                    <td><button onclick="return confirm('Are you sure ?')" class="btn btn-primary" type="submit" name="Remove_@a.NumberRef" id="Remove">Supprimer</button></td>
                                     <td><button class="btn btn-primary" type="submit" name="Modify_@a.NumberRef" id="Modify">Modifier</button></td>
 
                                 </tr>
@@ -178,12 +179,14 @@
             }
             @if (ViewBag.Message != null)
             {
-                <script type="text/javascript">
-            window.onload = function () {
-                alert("@ViewBag.Message");
+        <script type="text/javascript">
+                    window.onload = function alerte() {
+                alert('@Html.Raw(ViewBag.Message)');
             };
-                </script>
+        </script>
             }
+
+
         </div>
     </div>
 </form>

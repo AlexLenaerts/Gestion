@@ -14,6 +14,7 @@
             this.SellPrice = SellPrice;
             this.QuantityStock = quantityStock;
         }
+        public article() { }
         public override string ToString()
         {
             return ("\r\nRéférence: " + NumberRef + "\r\nNom: " + Name + "\r\nPrix de vente :" + SellPrice + "\r\nQuantity :" + QuantityStock);

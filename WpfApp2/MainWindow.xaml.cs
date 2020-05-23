@@ -37,7 +37,6 @@ namespace WpfApp2
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             con = new SqlConnection(ConnectionString);
-            DB.ConnectDB(con);
             stock_article = DB.DBTOLIST(con);
             Refresh();
         } 

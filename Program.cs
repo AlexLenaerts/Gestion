@@ -14,12 +14,7 @@ namespace Gestion_du_stock
             //Connection à la DB
             string ConnectionString = @"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C:\Users\Alexandre\Gestion_du_stock\Gestion_du_stock\Database1.mdf; Integrated Security = True";
             SqlConnection con = new SqlConnection(ConnectionString);
-            DB.ConnectDB(con);
-            //var configFile = Directory.GetCurrentDirectory() + @"\log4net.config";
-            //BasicConfigurator.Configure();
-
-            var task = new loggingService();
-
+            
 
             //Stock temporaire
             //List<article> Stock = new List<article>();
@@ -27,7 +22,6 @@ namespace Gestion_du_stock
             string decision;
             do
             {
-                task.Run("Démarrage de l'application", Level.Info);
 
                 Console.WriteLine();
                 Console.WriteLine("Que voulez-vous faire ?");
@@ -127,8 +121,6 @@ namespace Gestion_du_stock
                 }
             }
             while (decision != "8");
-            Console.ReadKey();
-            DB.CloseDB(con);
-        }
+            Console.ReadKey();        }
     }
 }
