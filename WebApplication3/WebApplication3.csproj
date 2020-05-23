@@ -22,8 +22,8 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Gestion\Batch.csproj" />
-    <ProjectReference Include="..\Gestion\WpfApp2\WPF.csproj" />
+    <ProjectReference Include="..\Batch.csproj" />
+    <ProjectReference Include="..\WpfApp2\WPF.csproj" />
   </ItemGroup>
 
 
