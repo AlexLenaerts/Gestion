@@ -1,6 +1,4 @@
-﻿using log4net.Config;
-using log4net.Core;
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.IO;
 

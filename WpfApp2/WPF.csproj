@@ -95,7 +95,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Batch.csproj">
+    <ProjectReference Include="..\Batch\Batch.csproj">
       <Project>{0df51c80-b2e1-46f0-a37a-a18e18b04ead}</Project>
       <Name>Batch</Name>
     </ProjectReference>

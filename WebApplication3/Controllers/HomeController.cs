@@ -5,14 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebApplication3.Models;
+using WebApplication.Models;
 using Gestion_du_stock;
 using System.Data.SqlClient;
 using System.Text;
-using article = WebApplication3.Models.article;
+using article = WebApplication.Models.article;
 using System.Text.RegularExpressions;
 
-namespace WebApplication3.Controllers
+namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
@@ -167,13 +167,13 @@ namespace WebApplication3.Controllers
 
                         sbRtn.AppendLine(body);
                     }
-                    System.IO.File.WriteAllText(@"C:\Users\Alexandre\WebApplication3\test.csv", sbRtn.ToString(), Encoding.UTF8);
-                    Process.Start(AppName, @"C:\Users\Alexandre\WebApplication3\test.csv");
+                    System.IO.File.WriteAllText(@"C:\Users\Alexandre\WebApplication\test.csv", sbRtn.ToString(), Encoding.UTF8);
+                    Process.Start(AppName, @"C:\Users\Alexandre\WebApplication\test.csv");
                 }
                 else if (x.Contains("load"))
                 {
                     con = new SqlConnection(ConnectionString);
-                    string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Alexandre\WebApplication3\test.csv");
+                    string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Alexandre\WebApplication\test.csv");
                     foreach (string s in readText)
                     {
                         if ((s!= "sep = ,") && (s != "Reference,Name,Price,Quantity"))

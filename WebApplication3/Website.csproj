@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>WebApplication</AssemblyName>
+    <RootNamespace>WebApplication</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,13 +18,12 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Batch.csproj" />
+    <ProjectReference Include="..\Batch\Batch.csproj" />
     <ProjectReference Include="..\WpfApp2\WPF.csproj" />
   </ItemGroup>
 
