@@ -1,3 +1,3 @@
 # Gestion
 
-Application pour gérer un stock
+Applications pour gérer un stock
