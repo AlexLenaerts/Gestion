@@ -14,10 +14,11 @@
         <div class="col-md-6">
             <button class="btn btn-primary" type="submit" name="Search" id="Search"> Rechercher </button>
             <button class="btn btn-primary" type="submit" name="Add" id="Add"> Ajouter </button>
-            <button class="btn btn-primary" name="extract" id="Exctract"> Extraire </button>
+            <button class="btn btn-primary" name="extract" id="Extract"> Extraire </button>
             <button class="btn btn-primary" name="load" id="Load"> Charger </button>
 
-            @switch (article.show)
+
+            @switch (article.Show)
             {
                 case "Add":
                     <p> </p>
@@ -118,7 +119,7 @@
                         <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
                     </div>
                     <button class="btn btn-primary" type="submit" name="rechercher" id="rechercher">Confirmer</button>
-                    @if (article.found)
+                    @if (article.Found)
                     {
                         <table class="table table-condensed table-hover">
                             <thead>
@@ -179,11 +180,11 @@
             }
             @if (ViewBag.Message != null)
             {
-        <script type="text/javascript">
+                <script type="text/javascript">
                     window.onload = function alerte() {
                 alert('@Html.Raw(ViewBag.Message)');
             };
-        </script>
+                </script>
             }
 
 

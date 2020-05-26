@@ -12,7 +12,7 @@
                 <button class="btn btn-primary" type="submit" name="Modify" id="Modify">Modifier</button>
                 <button class="btn btn-primary" type="submit" name="Search" id="Search">Rechercher </button>
             </div>
-            @switch (article.show)
+            @switch (article.Show)
             {
                 case "Add":
                     <div class="col-md-12 form-group">
@@ -55,7 +55,7 @@
                         <input asp-for="NumberRef" class="form-control" placeholder="Reference" />
                     </div>
 
-                    @if (article.found == true)
+                    @if (article.Found == true)
                     {
                         <table class="table table-condensed table-hover">
                             <thead>
@@ -82,7 +82,7 @@
                             </tbody>
                         </table>
                     }
-                    article.found = false;
+                    article.Found = false;
                     break;
             }
         </div>

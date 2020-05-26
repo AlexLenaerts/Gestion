@@ -12,8 +12,8 @@ namespace WebApplication.Models
         public string Name { get; set; }
         public double SellPrice { get; set; }
         public int QuantityStock { get; set; }
-        public static bool found { get; set; }
-        public static string show { get; set; }
+        public static bool Found { get; set; }
+        public static string Show { get; set; }
     }
 
 }

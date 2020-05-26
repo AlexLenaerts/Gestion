@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Text;
 using article = WebApplication.Models.article;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace WebApplication.Controllers
 {
@@ -31,17 +32,17 @@ namespace WebApplication.Controllers
         {
             con = new SqlConnection(ConnectionString);
             ViewData["stock"] = DB.DBTOLIST(con);
-            article.show = "DB";
+            article.Show = "DB";
             return View();
         }
-        
+
 
         [HttpPost]
         public IActionResult Index(article model)
         {
 
             bool check = false;
-            article.found = false;
+            article.Found = false;
             List<string> save = new List<string>();
 
             foreach (var x in Request.Form.Keys)
@@ -51,14 +52,14 @@ namespace WebApplication.Controllers
                     int y = int.Parse(x.Substring(7, x.Count() - 7));
                     con = new SqlConnection(ConnectionString);
                     ViewData["article"] = DB.DBTOLIST(con).Where(z => (z.NumberRef == y)).ToList();
-                    if (check == false && ViewData["article"]!=null)
+                    if (check == false && ViewData["article"] != null)
                     {
                         string articleREF = ((List<Gestion_du_stock.article>)ViewData["article"]).First().NumberRef.ToString(); //((List<Gestion_du_stock.article>)ViewData["article"]).items[0].NumberRef;
                         con = new SqlConnection(ConnectionString);
                         DB.RemoveArticleByRef(articleREF, con);
                         check = true;
                         ModelState.Clear();
-                        article.show = "DB";
+                        article.Show = "DB";
                     }
                 }
 
@@ -67,7 +68,7 @@ namespace WebApplication.Controllers
                     int y = int.Parse(x.Substring(7, x.Count() - 7));
                     con = new SqlConnection(ConnectionString);
                     ViewData["article"] = DB.DBTOLIST(con).Where(z => (z.NumberRef == y)).ToList();
-                    article.show = "Modify";
+                    article.Show = "Modify";
                 }
 
 
@@ -82,25 +83,25 @@ namespace WebApplication.Controllers
                     DB.ModifyArticle(newArticle, con);
                     check = true;
                     ModelState.Clear();
-                    article.show = "DB";
+                    article.Show = "DB";
                 }
 
                 else if (x.Contains("Search"))
                 {
-                    article.show = "Search";
+                    article.Show = "Search";
                 }
                 else if (x.Contains("rechercher") && model.NumberRef != 0 && check == false)
                 {
                     con = new SqlConnection(ConnectionString);
                     ViewData["ref"] = DB.DBTOLIST(con).Where(x => x.NumberRef == model.NumberRef).ToList();
                     check = true;
-                    article.found = true;
+                    article.Found = true;
                     ModelState.Clear();
                 }
 
                 else if (x.Contains("Add"))
                 {
-                    article.show = "Add";
+                    article.Show = "Add";
                 }
 
                 else if (x.Contains("Ajouter") && model.Name != null && model.NumberRef != 0 && model.SellPrice != 0 && model.QuantityStock != 0 && check == false)
@@ -113,7 +114,7 @@ namespace WebApplication.Controllers
                         string articleNAME = model.Name;
                         string articlePRICE = model.SellPrice.ToString();
                         string articleQUANTITY = model.QuantityStock.ToString();
-                        save = new List<string>() {articleNAME, articlePRICE, articleQUANTITY };
+                        save = new List<string>() { articleNAME, articlePRICE, articleQUANTITY };
                         ViewData["save1"] = save[0];
                         ViewData["save2"] = save[1];
                         ViewData["save3"] = save[2];
@@ -130,20 +131,19 @@ namespace WebApplication.Controllers
                         DB.AddToDB(newArticle, con);
                         check = true;
                         ModelState.Clear();
-                        article.show = "DB";
+                        article.Show = "DB";
                     }
-                    
+
                 }
                 else if (x.Contains("Stocks"))
                 {
                     con = new SqlConnection(ConnectionString);
                     ViewData["stock"] = DB.DBTOLIST(con);
-                    article.show = "DB";
+                    article.Show = "DB";
                 }
                 else if (x.Contains("extract"))
                 {
                     string AppName = "excel.exe";
-
                     con = new SqlConnection(ConnectionString);
                     StringBuilder sbRtn = new StringBuilder();
                     List<Gestion_du_stock.article> data = new List<Gestion_du_stock.article>();
@@ -167,16 +167,24 @@ namespace WebApplication.Controllers
 
                         sbRtn.AppendLine(body);
                     }
-                    System.IO.File.WriteAllText(@"C:\Users\Alexandre\WebApplication\test.csv", sbRtn.ToString(), Encoding.UTF8);
-                    Process.Start(AppName, @"C:\Users\Alexandre\WebApplication\test.csv");
+                    string filename = System.IO.Path.GetTempFileName().Replace(".tmp", ".csv");
+                    System.IO.File.WriteAllText(@$"{filename}", sbRtn.ToString(), Encoding.UTF8);
+                    Process p = Process.Start(AppName, @$"{filename}");
+                    while (!p.HasExited)
+                    {
+                        Console.WriteLine("Excel is busy");                        
+                    }
+                    System.IO.File.Delete(filename.Replace(".csv",".tmp"));
+                    System.IO.File.Delete(filename);
                 }
+
                 else if (x.Contains("load"))
                 {
                     con = new SqlConnection(ConnectionString);
-                    string[] readText = System.IO.File.ReadAllLines(@"C:\Users\Alexandre\WebApplication\test.csv");
+                    string[] readText = System.IO.File.ReadAllLines(@$"{System.IO.Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)}\test.csv");
                     foreach (string s in readText)
                     {
-                        if ((s!= "sep = ,") && (s != "Reference,Name,Price,Quantity"))
+                        if ((s != "sep = ,") && (s != "Reference,Name,Price,Quantity"))
                         {
                             string clean = Regex.Replace(s, "[^A-Za-z0-9,]", "");
                             var splited = clean.Split(",");
